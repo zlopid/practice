@@ -23,7 +23,8 @@ public abstract class ReverserTests {
 	protected int testReverseWords() {
 		return ok("Hi","Hi","Single word")
 			+ ok("Hello world", "world Hello", "Two words")
-			+ ok("I am a cat.","cat. a am I", "Short odd-words sentence");
+			+ ok("I am a cat.","cat. a am I", "Short odd-words sentence")
+			+ ok("Hello Dear,\tGoodbye","Goodbye\tDear, Hello", "Non-space whitespace");
 	}
 	
 	protected void printTestResult(int numFailedTests) {
