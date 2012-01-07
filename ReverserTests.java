@@ -12,7 +12,7 @@ public abstract class ReverserTests {
 		boolean passed = actual.equals(expected);
 		System.out.print(passed? "ok " : "not ok ");
 		System.out.print(String.valueOf(mTestNum) + " - " + description + " - ");
-		System.out.println("ReverseWords(" + input + ") = " + actual + (!passed? "; expected: " + expected : ""));
+		System.out.println(input + " => " + actual + (!passed? "; expected: " + expected : ""));
 		return passed? 0 : 1;
 	}
 	
@@ -21,7 +21,9 @@ public abstract class ReverserTests {
 	 * @return the number of failed tests
 	 */
 	protected int TestReverseWords() {
-		return WordsOk("Hi","Hi","Single word");
+		return WordsOk("Hi","Hi","Single word")
+			+ WordsOk("Hello world", "world Hello", "Two words")
+			+ WordsOk("I am a cat.","cat. a am I", "Short odd-words sentence");
 	}
 	
 	protected void PrintTestResult(int numFailedTests) {
