@@ -3,12 +3,12 @@ public abstract class ReverserTests {
 	protected IWordReverser mReverser;
 	
 	/**
-	 * Test the ReverseWords function and print the test result
+	 * Test the reverseWords function and print the test result
 	 * @return the number of failed tests
 	 */
-	protected int WordsOk(String input, String expected, String description) {
+	protected int ok(String input, String expected, String description) {
 		mTestNum++;
-		String actual = mReverser.ReverseWords(input);
+		String actual = mReverser.reverseWords(input);
 		boolean passed = actual.equals(expected);
 		System.out.print(passed? "ok " : "not ok ");
 		System.out.print(String.valueOf(mTestNum) + " - " + description + " - ");
@@ -17,22 +17,24 @@ public abstract class ReverserTests {
 	}
 	
 	/**
-	 * Run a suite of tests on the ReverseWords function of mReverser.
+	 * Run a suite of tests on the reverseWords function of mReverser.
 	 * @return the number of failed tests
 	 */
-	protected int TestReverseWords() {
-		return WordsOk("Hi","Hi","Single word")
-			+ WordsOk("Hello world", "world Hello", "Two words")
-			+ WordsOk("I am a cat.","cat. a am I", "Short odd-words sentence");
+	protected int testReverseWords() {
+		return ok("Hi","Hi","Single word")
+			+ ok("Hello world", "world Hello", "Two words")
+			+ ok("I am a cat.","cat. a am I", "Short odd-words sentence");
 	}
 	
-	protected void PrintTestResult(int numFailedTests) {
+	protected void printTestResult(int numFailedTests) {
 		if (numFailedTests == 0) {
 			System.out.println("# All tests passed!");
 		} else {
 			System.out.println("#" + String.valueOf(numFailedTests) + " tests failed");
 		}
 	}
-	
-	public abstract void Run();
+
+	public void run() {
+		printTestResult(testReverseWords());
+	}
 }

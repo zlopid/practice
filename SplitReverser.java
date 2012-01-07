@@ -1,5 +1,5 @@
 public class SplitReverser implements IWordReverser {
-	public String ReverseWords(String sentence) {
+	public String reverseWords(String sentence) {
 		String[] words = sentence.split("\\s");
 		
 		// Add the words to a buffer in reverse order
@@ -14,7 +14,7 @@ public class SplitReverser implements IWordReverser {
 	}
 	
 	public static void main(String[] args) {
-		(new SplitReverserTests()).Run();
+		(new SplitReverserTests()).run();
 	}
 }
 
@@ -22,7 +22,4 @@ class SplitReverserTests extends ReverserTests {
 	public SplitReverserTests() {
 		mReverser = new SplitReverser();
 	}
-	
-	public void Run() {
-		PrintTestResult(TestReverseWords());	}
 }

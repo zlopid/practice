@@ -6,5 +6,5 @@ interface IWordReverser {
 	 * White space between the words should also be reversed,
 	 * but the letters within the words should not be.
 	 */
-	public String ReverseWords(String sentence);
+	public String reverseWords(String sentence);
 }
