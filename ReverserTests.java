@@ -23,15 +23,19 @@ public abstract class ReverserTests {
 	protected int testReverseWords() {
 		return ok("Hi","Hi","Single word")
 			+ ok("Hello world", "world Hello", "Two words")
-			+ ok("I am a cat.","cat. a am I", "Short odd-words sentence")
-			+ ok("Hello Dear,\tGoodbye","Goodbye\tDear, Hello", "Non-space whitespace");
+			+ ok("I am a cat.","cat. a am I", "Short sentence")
+			+ ok("Hello cat,\tGoodbye","Goodbye\tcat, Hello", "Non-space whitespace")
+			+ ok("Space after this "," this after Space","Trailing whitespace")
+			+ ok(" Space before this","this before Space ","Beginning whitespace")
+			+ ok(" Hi "," Hi ","Both trailing and beginning whitespace")
+			+ ok("Hello, \tcat.","cat. \tHello,","Multi-character whitespace");
 	}
 	
 	protected void printTestResult(int numFailedTests) {
 		if (numFailedTests == 0) {
 			System.out.println("# All tests passed!");
 		} else {
-			System.out.println("#" + String.valueOf(numFailedTests) + " tests failed");
+			System.out.println("# " + String.valueOf(numFailedTests) + " tests failed");
 		}
 	}
 
