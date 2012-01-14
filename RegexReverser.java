@@ -36,12 +36,6 @@ public class RegexReverser implements IWordReverser {
 	}
 	
 	public static void main(String[] args) {
-		(new RegexReverserTests()).run();
-	}
-}
-
-class RegexReverserTests extends ReverserTests {
-	public RegexReverserTests() {
-		mReverser = new RegexReverser();
+		(new ReverserTests(new RegexReverser())).run();
 	}
 }

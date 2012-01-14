@@ -1,6 +1,10 @@
-public abstract class ReverserTests {
+public class ReverserTests {
 	protected int mTestNum;
 	protected IWordReverser mReverser;
+	
+	public ReverserTests(IWordReverser reverser) {
+		mReverser = reverser;
+	}
 	
 	/**
 	 * Test the reverseWords function and print the test result
