@@ -25,7 +25,9 @@ public class ReverserTests {
 	 * @return the number of failed tests
 	 */
 	protected int testReverseWords() {
-		return ok("Hi","Hi","Single word")
+		return ok("","","Empty string")
+			+ ok("I","I","Single character")
+			+ ok("Hi","Hi","Single word")
 			+ ok("Hello world", "world Hello", "Two words")
 			+ ok("I am a cat.","cat. a am I", "Short sentence")
 			+ ok("Hello cat,\tGoodbye","Goodbye\tcat, Hello", "Non-space whitespace")
