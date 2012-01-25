@@ -10,19 +10,10 @@ public class DoubleReverser implements IWordReverser {
 	/** 
 	 * Return a new string which reverses a the portion of the input string
 	 * between firstIndex and lastIndex.
+	 * 
+	 * Preconditions: 0 <= firstIndex <= lastIndex <= str.length
 	 */
-	private String reverseSubString(String input, int firstIndex, int lastIndex) {
-		// TODO: How much can I speed up the function by removing these checks? reverseWords 
-		// guarantees both are true
-		if (firstIndex < 0 || firstIndex >= input.length())
-			throw new IllegalArgumentException("The first index is out of bounds");
-		if (lastIndex < 0 || lastIndex >= input.length())
-			throw new IllegalArgumentException("The last index is out of bounds");
-		if (firstIndex > lastIndex)
-			throw new IllegalArgumentException("The first index is later than the last index");
-			
-		char[] str = input.toCharArray();
-		
+	private void reverseSubString(char[] str, int firstIndex, int lastIndex) {
 		// Swap each character in the first half of the array with the corresponding one in
 		// the back half of the array
 		for (int i = 0; i <= (lastIndex-firstIndex)/2; i++) {
@@ -30,7 +21,6 @@ public class DoubleReverser implements IWordReverser {
 			str[firstIndex+i] = str[lastIndex-i];
 			str[lastIndex-i] = temp;
 		}
-		return new String(str);
 	}
 
 	public String reverseWords(String sentence) {
@@ -38,21 +28,21 @@ public class DoubleReverser implements IWordReverser {
 			return sentence;
 		
 		// Reverse the whole sentence so the words are in the right order
-		String reversedSentence = reverseSubString(sentence, 0, sentence.length()-1);
-		
+		char[] reversedSentence = sentence.toCharArray();
+		reverseSubString(reversedSentence, 0, reversedSentence.length-1);		
 		// Reverse each word within the sentence so they are the right direction
 		int lastWordBoundary = 0;
-		boolean wasWhitespace = Character.isWhitespace(reversedSentence.charAt(0));
+		boolean wasWhitespace = Character.isWhitespace(reversedSentence[0]);
 		for (int i = 1; i < sentence.length(); i++) {
-			if (Character.isWhitespace(reversedSentence.charAt(i)) != wasWhitespace) {
-				reversedSentence = reverseSubString(reversedSentence, lastWordBoundary, i-1);
+			if (Character.isWhitespace(reversedSentence[i]) != wasWhitespace) {
+				reverseSubString(reversedSentence, lastWordBoundary, i-1);
 				lastWordBoundary = i;
 				wasWhitespace = !wasWhitespace;
 			}
 		}
-		reversedSentence = reverseSubString(reversedSentence, lastWordBoundary, reversedSentence.length()-1);
+		reverseSubString(reversedSentence, lastWordBoundary, reversedSentence.length-1);
 		
-		return reversedSentence;
+		return new String(reversedSentence);
 	}
 	
 	public static void main(String[] args) {
