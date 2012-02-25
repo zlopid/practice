@@ -11,7 +11,7 @@ def smallestFactor(num):
 	return f
 
 def largestPrimeFactor(num):
-	'''Find the largest factor of a number by recursively removing all smaller factors'''
+	'''Find the largest prime factor of a number by recursively removing all smaller factors'''
 	sf = smallestFactor(num)
 	
 	# Base case: num is prime, and has no smaller factors 
