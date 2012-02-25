@@ -1,21 +1,18 @@
 import math
 
-def isPalindrome(num):
+def isPalindrome(num, digit=0):
 	'''Checks whether a given integer number is palindromic (the same forwards and backwards)'''
-	if int(num) != num:
-		raise TypeError("integer argument expected, got float")
+	numDigits = math.ceil(math.log(num, 10))
+	if digit > numDigits/2:
+		return True
 		
-	digits = []
-	while num > 0:
-		digits.append(num % 10)
-		num = math.floor(num/10)
-	
-	numDigits = len(digits)
-	for index in range(int(numDigits/2)):
-		if digits[index] != digits[numDigits-1-index]:
-			return False
-	return True
-	
+	lastDigit = math.floor(num / 10**digit) % 10
+	firstDigit = math.floor(num / 10**(numDigits-1-digit)) % 10
+	if firstDigit != lastDigit:
+		return False
+		
+	return isPalindrome(num, digit+1)
+
 def palindromesFromNDigitProducts(numDigits):
 	minValue = 10**(numDigits-1)
 	lhs = 10**numDigits
