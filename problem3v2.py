@@ -1,5 +1,3 @@
-import math
-
 def smallestFactor(num):
 	'''Find the smallest factor of a number, which is always a prime'''
 	# We know the smallest factor is prime because if it was not,
