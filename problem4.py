@@ -24,6 +24,6 @@ def palindromesFromNDigitProducts(numDigits):
 			product = lhs*rhs
 			if isPalindrome(product):
 				yield product
-		
+
 if __name__ == "__main__":
 	print max(palindromesFromNDigitProducts(3))
