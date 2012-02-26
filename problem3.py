@@ -1,18 +1,5 @@
 import math
 
-def primes():
-	'''Generate endless new primes. Warning: this will be slow for larger numbers'''
-	primes = []
-	n = 2
-	while True:
-		for p in primes:
-			if (n % p == 0):
-				break
-		else:
-			yield n
-			primes.append(n)
-		n += 1
-
 def factors(num):
 	'''Generates all factors of a given number in increasing order'''
 	
@@ -34,7 +21,7 @@ def factors(num):
 def primeFactors(num):
 	'''Returns a list of the prime factors of the given num'''
 	remainingFactors = [f for f in factors(num)]
-	getPrimes = primes()
+	getPrimes = allPrimes()
 	p = getPrimes.next()
 	
 	# Eliminate factors that are divisible by primes until all factors are known to be prime
