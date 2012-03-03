@@ -1,4 +1,4 @@
-def allPrimes():
+def all_primes():
 	'''Generate endless new primes. Warning: this will be slow for larger numbers'''
 	primes = []
 	n = 2
@@ -11,7 +11,7 @@ def allPrimes():
 			primes.append(n)
 		n += 1
 
-def smallestFactor(num):
+def smallest_factor(num):
 	'''Find the smallest factor of a number, which is always a prime'''
 	# We know the smallest factor is prime because if it was not,
 	# it would be the product of two smaller numbers, and those numbers

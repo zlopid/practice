@@ -1,14 +1,13 @@
-from primes import allPrimes
+from primes import all_primes
 
-def nthPrime(num):
+def nth_prime(num):
 	if (num < 1 or int(num) != num):
 		raise TypeError("Expected a positive real number")
 	
-	getPrime = allPrimes()
+	get_prime = all_primes()
 	for i in range(num-1):
-		getPrime.next()
-	return getPrime.next()
+		get_prime.next()
+	return get_prime.next()
 
 if __name__ == "__main__":
-	print nthPrime(10001)
-		
+	print nth_prime(10001)

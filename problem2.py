@@ -1,6 +1,6 @@
-def fibonacci(maxValue):
+def fibonacci(max_value):
 	'''
-	Generates values from the fibonacci sequence up to maxValue
+	Generates values from the fibonacci sequence up to max_value
 	
 	See http://en.wikipedia.org/wiki/Fibonacci_number
 	'''
@@ -8,14 +8,14 @@ def fibonacci(maxValue):
 	n_1 = 1
 	n = n_1 + n_2
 	yield n
-	while n <= maxValue:
+	while n <= max_value:
 		yield n
 		n_2 = n_1
 		n_1 = n
 		n = n_1 + n_2
 
-def isEven(x):
+def is_even(x):
 	return not x % 2;
 
 if __name__ == "__main__":
-	print sum(filter(isEven, fibonacci(4000000)))
+	print sum(filter(is_even, fibonacci(4000000)))

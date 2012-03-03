@@ -1,6 +1,7 @@
-from primes import smallestFactor
+from primes import smallest_factor
+from more_math import product
 
-def primeFactorization(num):
+def prime_factorization(num):
 	'''Generates the prime factorization of the given number, in order from smallest to largest'''
 	if (num < 0 or int(num) != num):
 		raise TypeError("Expected a positive integer")
@@ -8,7 +9,7 @@ def primeFactorization(num):
 	sf = 1
 	while sf != num:
 		num = num/sf
-		sf = smallestFactor(num)
+		sf = smallest_factor(num)
 		yield sf
 
 def merge(lhs, rhs):
@@ -17,38 +18,34 @@ def merge(lhs, rhs):
 	the same occurrence of each value as the greater of the source arrays
 	'''
 	merged = []
-	lhsIndex = 0
-	rhsIndex = 0
-	while (lhsIndex < len(lhs) or rhsIndex < len(rhs)):
-		if lhsIndex < len(lhs) and rhsIndex < len(rhs) and (lhs[lhsIndex] == rhs[rhsIndex]):
-			merged.append(lhs[lhsIndex])
-			lhsIndex += 1
-			rhsIndex += 1
-		elif lhsIndex < len(lhs) and (rhsIndex >= len(rhs) or lhs[lhsIndex] < rhs[rhsIndex]):
-			merged.append(lhs[lhsIndex])
-			lhsIndex += 1
-		elif rhsIndex < len(rhs):
-			merged.append(rhs[rhsIndex])
-			rhsIndex += 1
+	lhs_index = 0
+	rhs_index = 0
+	while (lhs_index < len(lhs) or rhs_index < len(rhs)):
+		if lhs_index < len(lhs) and rhs_index < len(rhs) and (lhs[lhs_index] == rhs[rhs_index]):
+			merged.append(lhs[lhs_index])
+			lhs_index += 1
+			rhs_index += 1
+		elif lhs_index < len(lhs) and (rhs_index >= len(rhs) or lhs[lhs_index] < rhs[rhs_index]):
+			merged.append(lhs[lhs_index])
+			lhs_index += 1
+		elif rhs_index < len(rhs):
+			merged.append(rhs[rhs_index])
+			rhs_index += 1
 	return merged
 
-def smallestNumberByDivisibleBy(list):
+def least_common_multiple(list):
 	'''
 	Finds the smallest number divisible by all numbers in the list by
 	combining their prime factorizations to get the factorization of the result
 	'''
-	sharedFactors = []
+	shared_factors = []
 
 	for n in list:
 		if int(n) != n:
 			raise TypeError("Expected all integer entries in the list")
-		sharedFactors = merge(sharedFactors, [f for f in primeFactorization(n)])
+		shared_factors = merge(shared_factors, [f for f in prime_factorization(n)])
 
-	num = 1
-	for n in sharedFactors:
-		num *= n
-
-	return num
+	return product(shared_factors)
 
 if __name__ == "__main__":
-	print smallestNumberByDivisibleBy(range(1,21))
+	print least_common_multiple(range(1,21))
