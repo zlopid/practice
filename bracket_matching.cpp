@@ -7,19 +7,41 @@
  {}, and [], determine whether the brackets are valid, with end brackets matching
  beginning ones
 */
+
+bool isStartBracket(char c) {
+	return (c == '(') || (c == '{') || (c == '[');
+}
+
+bool isEndBracket(char c) {
+	return (c == ')') || (c == '}') || (c == ']');
+}
+
+bool startEndBracketsMatch(char start, char end) {
+	switch (end) {
+	case ')':
+		return (start == '(');
+	case '}':
+		return (start == '{');
+	case ']':
+		return (start == '[');
+	default:
+		return false;
+	}
+}
+
 bool bracketsMatch(const std::string& input) {
-	int brackets = 0;
+	std::stack<char> brackets;
 	for (int i = 0; i < input.size(); i++) {
-		switch(input[i]) {
-		case '(':
-			brackets++;
-			break;
-		case ')':
-			brackets--;
-			break;
+		char current = input[i];
+		if (isStartBracket(current)) {
+			brackets.push(current);
+		} else if (isEndBracket(current)) {
+			if (brackets.empty() || !startEndBracketsMatch(brackets.top(), current))
+				return false;
+			brackets.pop();
 		}
 	}
-	return brackets == 0;
+	return brackets.empty();
 }
 
 int test(const std::string& input, bool expected) {
@@ -37,5 +59,9 @@ int main(int argc, char *argv[]) {
 	failingTests += test("(", false);
 	failingTests += test(")", false);
 	failingTests += test(")(", false);
+	failingTests += test("( { [ ] } )", true);
+	failingTests += test("(}", false);
+	failingTests += test("(})}", false);
+	failingTests += test("{a: bc(d[3]-e[2])}", true);
 	std::cout << "# " << failingTests << " tests failed" << std::endl;
 }
