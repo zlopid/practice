@@ -37,7 +37,7 @@ bool startEndBracketsMatch(char start, char end) {
 bool bracketsMatch(const std::string& input) {
 	std::stack<char> startBrackets;
 	for (int i = 0; i < input.size(); i++) {
-		char current = input[i];
+		const char current = input[i];
 		
 		if (isStartBracket(current)) {
 			startBrackets.push(current);
@@ -63,15 +63,15 @@ bool bracketsMatch(const std::string& input) {
 int bracketEndIndex(const std::string& input, unsigned int startIndex) {
 	// At the start of the string, there is no bracket at startIndex-1,
 	// - use the null character so any unexpected end brackets will fail to match
-	char startBracket =  startIndex != 0 ? input[startIndex-1] : '\0';
+	const char startBracket =  startIndex != 0 ? input[startIndex-1] : '\0';
 
 	// Iterate through the string until the end bracket is found
 	for (int i = startIndex; i < input.size(); i++) {
-		char current = input[i];
+		const char current = input[i];
 
 		// For each new starting bracket, recurse to skip to its end
 		if (isStartBracket(current)) {
-			int endIndex = bracketEndIndex(input, i+1);
+			const int endIndex = bracketEndIndex(input, i+1);
 			if (endIndex > 0)
 				i = endIndex;
 			else
