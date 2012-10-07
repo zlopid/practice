@@ -2,8 +2,13 @@
 #include <stack>
 #include <string>
 
+/*
+ Given a string with an expression that uses several types of brackets, like (),
+ {}, and [], determine whether the brackets are valid, with end brackets matching
+ beginning ones
+*/
 bool bracketsMatch(const std::string& input) {
-	return false;
+	return true;
 }
 
 int test(const std::string& input, bool expected) {
@@ -17,5 +22,7 @@ int test(const std::string& input, bool expected) {
 int main(int argc, char *argv[]) {
 	int failingTests = 0;
 	failingTests += test("", true);
+	failingTests += test("()", true);
+	failingTests += test("(", false);
 	std::cout << "# " << failingTests << " tests failed" << std::endl;
 }
