@@ -8,6 +8,7 @@
  beginning ones
 */
 
+// To make it easier to read the code, encapsulate these simple checks in functions
 bool isStartBracket(char c) {
 	return (c == '(') || (c == '{') || (c == '[');
 }
@@ -18,32 +19,45 @@ bool isEndBracket(char c) {
 
 bool startEndBracketsMatch(char start, char end) {
 	switch (end) {
-	case ')':
-		return (start == '(');
-	case '}':
-		return (start == '{');
-	case ']':
-		return (start == '[');
-	default:
-		return false;
+	case ')': return (start == '(');
+	case '}': return (start == '{');
+	case ']': return (start == '[');
+	default: return false;
 	}
 }
 
+/**
+ * Determine whether end brackets match the starting ones
+ * by tracking the last start bracket in a stack.
+ *
+ * @param[in] input the expression to check
+ * @return true if all start brackets have matching end brackets,
+ *   and there are no extra end brackets.
+ */
 bool bracketsMatch(const std::string& input) {
-	std::stack<char> brackets;
+	std::stack<char> startBrackets;
 	for (int i = 0; i < input.size(); i++) {
 		char current = input[i];
+		
 		if (isStartBracket(current)) {
-			brackets.push(current);
+			startBrackets.push(current);
+			
 		} else if (isEndBracket(current)) {
-			if (brackets.empty() || !startEndBracketsMatch(brackets.top(), current))
+			if (startBrackets.empty() // end bracket before start bracket
+				|| !startEndBracketsMatch(startBrackets.top(), current)) { // mismatch
 				return false;
-			brackets.pop();
+			}
+			startBrackets.pop();
 		}
 	}
-	return brackets.empty();
+	return startBrackets.empty(); // extra start brackets
 }
 
+/**
+ * Check that the result of bracketsMatch matches the expected output
+ * and print a line in TAP format
+ * @return the number of failed tests
+ */
 int test(const std::string& input, bool expected) {
 	bool actual = bracketsMatch(input);
 	if (actual != expected)
