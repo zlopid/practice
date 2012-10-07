@@ -63,7 +63,7 @@ bool bracketsMatch(const std::string& input) {
 int bracketEndIndex(const std::string& input, unsigned int startIndex) {
 	// At the start of the string, there is no bracket at startIndex-1,
 	// - use the null character so any unexpected end brackets will fail to match
-	const char startBracket =  startIndex != 0 ? input[startIndex-1] : '\0';
+	const char startBracket = startIndex != 0 ? input[startIndex-1] : '\0';
 
 	// Iterate through the string until the end bracket is found
 	for (int i = startIndex; i < input.size(); i++) {
@@ -82,7 +82,9 @@ int bracketEndIndex(const std::string& input, unsigned int startIndex) {
 			return startEndBracketsMatch(startBracket, current) ? i : -1;
 		}
 	}
-	return input.size()-1;
+
+	// It is only ok to reach the end if we started at the beginning
+	return startIndex != 0 ? -1 : input.size()-1;
 }
 
 /**
@@ -121,6 +123,7 @@ int main(int argc, char *argv[]) {
 	failingTests += test("()", true);
 	failingTests += test("())", false);
 	failingTests += test("(", false);
+	failingTests += test("a(", false);
 	failingTests += test(")", false);
 	failingTests += test(")(", false);
 	failingTests += test("( { [ ] } )", true);
