@@ -85,21 +85,34 @@ int bracketEndIndex(const std::string& input, unsigned int startIndex) {
 	return input.size()-1;
 }
 
+/**
+ * Determine whether end brackets match the starting ones, using
+ * recursion to keep the context for each level of brackets
+ *
+ * @param[in] input the expression to check
+ * @return true if all start brackets have matching end brackets,
+ *   and there are no extra end brackets.
+ */
 bool bracketsMatchRecursive(const std::string& input) {
 	return bracketEndIndex(input, 0) == input.size()-1;
 }
 
-/**
- * Check that the result of bracketsMatchRecursive matches the expected output
- * and print a line in TAP format
- * @return the number of failed tests
- */
-int test(const std::string& input, bool expected) {
-	bool actual = bracketsMatchRecursive(input);
+/** Print the result of the test in TAP format, and return 1 if it failed */
+int printMessage(const std::string& input, bool expected, bool actual) {
 	if (actual != expected)
 		std::cout << "not ";
 	std::cout << "ok: " << input << std::endl;
 	return (actual == expected) ? 0 : 1;
+}
+
+/**
+ * Check that the result of both algorithms matches the expected output
+ * and print a line in TAP format
+ * @return the number of failed tests
+ */
+int test(const std::string& input, bool expected) {
+	return printMessage(input, expected, bracketsMatch(input))
+		+ printMessage(input, expected, bracketsMatchRecursive(input));
 }
 
 int main(int argc, char *argv[]) {
