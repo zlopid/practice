@@ -8,7 +8,18 @@
  beginning ones
 */
 bool bracketsMatch(const std::string& input) {
-	return true;
+	int brackets = 0;
+	for (int i = 0; i < input.size(); i++) {
+		switch(input[i]) {
+		case '(':
+			brackets++;
+			break;
+		case ')':
+			brackets--;
+			break;
+		}
+	}
+	return brackets == 0;
 }
 
 int test(const std::string& input, bool expected) {
@@ -24,5 +35,7 @@ int main(int argc, char *argv[]) {
 	failingTests += test("", true);
 	failingTests += test("()", true);
 	failingTests += test("(", false);
+	failingTests += test(")", false);
+	failingTests += test(")(", false);
 	std::cout << "# " << failingTests << " tests failed" << std::endl;
 }
